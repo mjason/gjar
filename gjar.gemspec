@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["tywf91@gmail.com"]
   spec.summary       = %q{同步jar包的工具}
   spec.description   = %q{同步jar包的工具}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/mjason/gjar"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
