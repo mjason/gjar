@@ -1,29 +1,21 @@
-# Gjar
+# Gjar 一个简单的jar包同步工具
 
-TODO: Write a gem description
+## install 
 
-## Installation
+1. 安转ruby
+2. gem install gjar
 
-Add this line to your application's Gemfile:
+## 上传或者下载包
 
-    gem 'gjar'
+```ruby
+host 'ip'
+username 'ubuntu'
+password 'adsfasdf'
+remote_path '/home/ubuntu/jar' # 服务器地址
 
-And then execute:
+jar_path './libs' # jar包下载地址
 
-    $ bundle
+jar 'test', '1.0.1' # jar 包的名字和版本
 
-Or install it yourself as:
-
-    $ gem install gjar
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( http://github.com/<my-github-username>/gjar/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+upload_path './build' # 上传的地址 jar包命名 test-1_1_1.jar
+```
