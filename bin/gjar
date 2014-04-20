@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+# coding: utf-8
+require 'net/sftp'
+
+class Gjar
+
+  def initialize
+    @jar_list = []
+    eval(File.read './Jarfile')
+    download_jar
+  end
+
+  def host name
+    @host_name = name
+  end
+  
+  def username name
+    @username = name
+  end
+
+  def password pw
+    @password = pw
+  end
+
+  def remote_path path
+    @remote_path = path
+  end
+
+  def jar_path path
+    @path = path
+  end
+
+  def jar package_name, version
+    @jar_list << [package_name, version]
+  end
+
+  def upload_path (path)
+    Net::SFTP.start(@host_name, @username, password: @password) do |sftp|
+      Dir[path+ "/*.jar"].each do |name|
+        puts "start upload #{name}"      
+        sftp.upload! name, "#{@remote_path}/#{name.split('/').last}"
+      end
+    end
+  end
+
+  def download_jar
+    Net::SFTP.start(@host_name, @username, password: @password) do |sftp|
+      @jar_list.each { |jar|
+        name = "#{jar[0]}-#{jar[1].gsub(/\./, '_')}.jar"
+        puts "start download #{name}"
+        sftp.download! "#{@remote_path}/#{name}", "#{@path}/#{name}"
+      }
+    end
+  end
+  
+end
+
+Gjar.new
